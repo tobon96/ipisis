@@ -19,7 +19,7 @@ test:
     - echo "Testing"
 
 deploy:
-  stage: deply
+  stage: deploy
   script:
     - echo "deploying"
     - docker login -u lisudea
