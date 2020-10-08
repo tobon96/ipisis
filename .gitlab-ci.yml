@@ -1,0 +1,26 @@
+stages:
+  - build
+  - test
+  - deploy
+  -
+image: docker:stable
+
+build:
+  stage: build
+  script:
+    - echo "Building"
+    - pwd
+    - docker build -t ipisis .
+    - docker tag ipisis lisudea/ipisis:cd
+
+test:
+  stage: test
+  script:
+    - echo "Testing"
+
+deploy:
+  stage: deply
+  script:
+    - echo "deploying"
+    - docker login -u lisudea
+    - docker push lisudea/ipisis:cd
