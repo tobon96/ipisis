@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: IPISIS
+
+  jpa:
+    database: mysql
+    show-sql: false
+
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://192.168.30.107:3306/ipisis
+    username: root
+    password: s3cur3d4t4
+
+
+server:
+  port: 9666
