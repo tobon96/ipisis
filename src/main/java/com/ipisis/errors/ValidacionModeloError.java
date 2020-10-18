@@ -15,6 +15,7 @@ public class ValidacionModeloError {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handlerErrorValidacion(MethodArgumentNotValidException exception) {
+
         DetalleErrorResponse detalleError = DetalleErrorResponse.builder()
                 .timestamp(new Date())
                 .error("Error validando los campos del objeto")

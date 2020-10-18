@@ -1,5 +1,7 @@
 package com.ipisis.controllers;
 
+import com.ipisis.models.entities.tables.IdeaMateria;
+import com.ipisis.repositories.IdeaMateriaRepository;
 import com.ipisis.services.IdeaService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +18,19 @@ public class IdeaControllerTest {
     @Autowired
     IdeaService ideaService;
 
+    @Autowired
+    IdeaMateriaRepository ideaMateriaRepository;
+
 
     @Test
     public void probarRepository() {
-        ideaService.obtenerIdea(1);
+
+        IdeaMateria ideaMateria = new IdeaMateria();
+
+        ideaMateria.setIdeaId(128);
+        ideaMateria.setMateriaId(2508103);
+
+        ideaMateria = ideaMateriaRepository.save(ideaMateria);
+
     }
 }

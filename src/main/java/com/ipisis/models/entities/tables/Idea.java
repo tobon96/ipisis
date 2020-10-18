@@ -18,8 +18,7 @@ import java.util.List;
 public class Idea {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "titulo")
@@ -36,6 +35,7 @@ public class Idea {
 
     @Column(name = "max_miembros")
     private Integer maxMiembros;
+
 
     @OneToMany(targetEntity = MateriaIdeaView.class, cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn(name = "idea", referencedColumnName = "id")

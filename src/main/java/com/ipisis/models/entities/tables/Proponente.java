@@ -12,21 +12,26 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "idea_materia")
-public class IdeaMateria {
+@Table(name = "proponente")
+public class Proponente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
+
+    @Column(name = "tipo")
+    private String tipo;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Column(name = "correo")
+    private String correo;
 
     @Column(name = "idea_id")
     private int ideaId;
 
-    @Column(name = "materia_codigo")
-    private int materiaId;
-
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "materia_codigo", insertable = false, updatable = false)
-    private Materia materia;
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", insertable = false, updatable = false)
+    private Idea idea;
 }

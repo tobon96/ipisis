@@ -16,12 +16,16 @@ import javax.persistence.*;
 public class Prerrequisito {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "idea_id")
     private int ideaId;
 
-    @OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @Column(name = "materia_codigo")
+    private int codigoMateria;
+
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "materia_codigo", insertable = false, updatable = false)
     private Materia materia;
 }

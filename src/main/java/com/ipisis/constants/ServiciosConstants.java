@@ -2,5 +2,7 @@ package com.ipisis.constants;
 
 public final class ServiciosConstants {
 
-    ///// Mapeo
+    ///// Código cursos
+    public static final Integer PI_I = 2508103;
+    public static final Integer PI_II = 2508203;
 }
