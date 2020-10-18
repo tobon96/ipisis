@@ -1,18 +1,16 @@
 package com.ipisis.services;
 
+import com.ipisis.constants.EntidadesConstants;
+import com.ipisis.dtos.IdeaAprobacionDTO;
 import com.ipisis.dtos.IdeaDTO;
 import com.ipisis.mappers.IdeaDTOMapper;
-import com.ipisis.models.entities.tables.Idea;
-import com.ipisis.models.entities.tables.IdeaMateria;
-import com.ipisis.models.entities.tables.Prerrequisito;
-import com.ipisis.models.entities.tables.Proponente;
-import com.ipisis.repositories.IdeaMateriaRepository;
-import com.ipisis.repositories.IdeaRepository;
-import com.ipisis.repositories.PrerrequisitoRepository;
-import com.ipisis.repositories.ProponenteRepository;
+import com.ipisis.models.entities.tables.*;
+import com.ipisis.models.responses.DetallePeticionResponse;
+import com.ipisis.repositories.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,12 +23,14 @@ public class IdeaService {
     private final IdeaMateriaRepository ideaMateriaRepository;
     private final PrerrequisitoRepository prerrequisitoRepository;
     private final ProponenteRepository proponenteRepository;
+    private final IdeaHistorialRepository ideaHistorialRepository;
 
-    public IdeaService(IdeaRepository ideaRepository, IdeaMateriaRepository ideaMateriaRepository, PrerrequisitoRepository prerrequisitoRepository, ProponenteRepository proponenteRepository) {
+    public IdeaService(IdeaRepository ideaRepository, IdeaMateriaRepository ideaMateriaRepository, PrerrequisitoRepository prerrequisitoRepository, ProponenteRepository proponenteRepository, IdeaHistorialRepository ideaHistorialRepository) {
         this.ideaRepository = ideaRepository;
         this.ideaMateriaRepository = ideaMateriaRepository;
         this.prerrequisitoRepository = prerrequisitoRepository;
         this.proponenteRepository = proponenteRepository;
+        this.ideaHistorialRepository = ideaHistorialRepository;
     }
 
     public IdeaDTO obtenerIdea(int id) {
@@ -78,6 +78,13 @@ public class IdeaService {
                             .correo(ideaProponenteDTO.getCorreo())
                             .build()));
 
+            ideaHistorialRepository.save(IdeaHistorial.builder()
+                    .ideaId(idea.getId())
+                    .fechaActualizacion(new Date())
+                    .observacion(EntidadesConstants.OBSERVACION_IDEA_CREADA)
+                    .estado(EntidadesConstants.ESTADO_IDEA_CREADA)
+                    .build());
+
             ideaDTO.setIdeaId(idea.getId());
 
             return ideaDTO;
@@ -85,5 +92,32 @@ public class IdeaService {
             log.error("Ocurrió un error creando la idea: " + ideaDTO.toString());
             return null;
         }
+    }
+
+    public DetallePeticionResponse procesarIdeas(IdeaAprobacionDTO ideaAprobacionDTO) {
+
+        ideaAprobacionDTO.getIdeas().forEach(ideaId -> {
+            //Todo Enviar correo de cambio de estado de las ideas
+
+            if(ideaAprobacionDTO.getEstado().equals("APROBADA")) {
+                ideaHistorialRepository.save(IdeaHistorial.builder()
+                        .ideaId(ideaId)
+                        .fechaActualizacion(new Date())
+                        .observacion(ideaAprobacionDTO.getObservacion())
+                        .estado(EntidadesConstants.ESTADO_IDEA_APROBADA)
+                        .build());
+            } else if(ideaAprobacionDTO.getEstado().equals("RECHAZADA")) {
+                ideaHistorialRepository.save(IdeaHistorial.builder()
+                        .ideaId(ideaId)
+                        .fechaActualizacion(new Date())
+                        .observacion(ideaAprobacionDTO.getObservacion())
+                        .estado(EntidadesConstants.ESTADO_IDEA_RECHAZADA)
+                        .build());
+            }
+
+
+        });
+
+        return new DetallePeticionResponse();
     }
 }

@@ -1,7 +1,9 @@
 package com.ipisis.controllers;
 
 import com.ipisis.constants.EndpointsConstants;
+import com.ipisis.dtos.IdeaAprobacionDTO;
 import com.ipisis.dtos.IdeaDTO;
+import com.ipisis.models.responses.DetallePeticionResponse;
 import com.ipisis.services.IdeaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,5 +37,10 @@ public class IdeaController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<IdeaDTO> crearIdea(@Valid @RequestBody IdeaDTO ideaDTO) {
         return new ResponseEntity<>(ideaService.crearIdea(ideaDTO), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = EndpointsConstants.ENDPOINT_IDEAS_ESTADO, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DetallePeticionResponse> cambiarEstadoIdeas(@Valid @RequestBody IdeaAprobacionDTO ideaAprobacionDTO) {
+        return new ResponseEntity<>(ideaService.procesarIdeas(ideaAprobacionDTO), HttpStatus.ACCEPTED);
     }
 }

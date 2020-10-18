@@ -8,6 +8,7 @@ public final class EndpointsConstants {
 
     ///// Ideas
     public static final String ENDPOINT_IDEAS = "/ideas";
+    public static final String ENDPOINT_IDEAS_ESTADO = "/estado";
 
     ///// Materias
     public static final String ENDPOINT_MATERIAS = "/materias";
@@ -15,5 +16,11 @@ public final class EndpointsConstants {
 
     ///// Profesores
     public static final String ENDPOINT_PROFESORES = "/docentes";
+
+    ///// Semestres
+    public static final String ENDPOINT_SEMESTRES = "/semestres";
+
+    ///// Ofertas
+    public static final String ENDPOINT_OFERTAS = "/ofertas";
 
 }
