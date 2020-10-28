@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping(EndpointsConstants.ENDPOINT_SEMESTRES)
 @CrossOrigin
-public class SemestreController {
+public class    SemestreController {
 
     private final SemestreService semestreService;
 

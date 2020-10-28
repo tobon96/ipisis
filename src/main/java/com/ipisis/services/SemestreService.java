@@ -4,6 +4,7 @@ import com.ipisis.dtos.SemestreDTO;
 import com.ipisis.mappers.SemestreDTOMapper;
 import com.ipisis.models.entities.tables.Semestre;
 import com.ipisis.repositories.SemestreRepository;
+import com.ipisis.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +33,10 @@ public class SemestreService {
         try {
             semestreRepository.save(Semestre.builder()
                     .codigo(semestreDTO.getCodigo())
-                    .inicioSemestre(SemestreDTOMapper.df.parse(semestreDTO.getInicioSemestre()))
-                    .cierreSemestre(SemestreDTOMapper.df.parse(semestreDTO.getCierreSemestre()))
-                    .inicioInscripcion(SemestreDTOMapper.df.parse(semestreDTO.getInicioInscripcion()))
-                    .cierreInscripcion(SemestreDTOMapper.df.parse(semestreDTO.getCierreInscripcion()))
+                    .inicioSemestre(DateUtils.df.parse(semestreDTO.getInicioSemestre()))
+                    .cierreSemestre(DateUtils.df.parse(semestreDTO.getCierreSemestre()))
+                    .inicioInscripcion(DateUtils.df.parse(semestreDTO.getInicioInscripcion()))
+                    .cierreInscripcion(DateUtils.df.parse(semestreDTO.getCierreInscripcion()))
                     .build());
 
         } catch (Exception e) {
@@ -59,10 +60,10 @@ public class SemestreService {
         try {
             semestreRepository.save(Semestre.builder()
                     .codigo(id)
-                    .inicioSemestre(SemestreDTOMapper.df.parse(semestreDTO.getInicioSemestre()))
-                    .cierreSemestre(SemestreDTOMapper.df.parse(semestreDTO.getCierreSemestre()))
-                    .inicioInscripcion(SemestreDTOMapper.df.parse(semestreDTO.getInicioInscripcion()))
-                    .cierreInscripcion(SemestreDTOMapper.df.parse(semestreDTO.getCierreInscripcion()))
+                    .inicioSemestre(DateUtils.df.parse(semestreDTO.getInicioSemestre()))
+                    .cierreSemestre(DateUtils.df.parse(semestreDTO.getCierreSemestre()))
+                    .inicioInscripcion(DateUtils.df.parse(semestreDTO.getInicioInscripcion()))
+                    .cierreInscripcion(DateUtils.df.parse(semestreDTO.getCierreInscripcion()))
                     .build());
         } catch (Exception e) {
             return null;

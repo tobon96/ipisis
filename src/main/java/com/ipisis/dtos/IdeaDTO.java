@@ -17,6 +17,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class IdeaDTO {
 
     private int ideaId;
@@ -43,7 +44,6 @@ public class IdeaDTO {
     @Valid
     @NotNull(message = "Se debe enviar el objeto con la lista de proponentes de la idea")
     @NotEmpty(message = "La lista de proponentes no debe estar vacía")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<@Valid IdeaProponenteDTO> proponentes;
 
 }

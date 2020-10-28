@@ -23,4 +23,11 @@ public final class EndpointsConstants {
     ///// Ofertas
     public static final String ENDPOINT_OFERTAS = "/ofertas";
 
+    ///// Estudiantes
+    public static final String ENDPOINT_ESTUDIANTES = "/estudiantes";
+
+    ///// Equipos
+    public static final String ENDPOINT_EQUIPOS = "/equipos";
+    public static final String ENDPOINT_EQUIPOS_INV = "/invitacion";
+
 }

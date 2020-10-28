@@ -1,6 +1,6 @@
 package com.ipisis.services;
 
-import com.ipisis.mappers.OfertaDTO;
+import com.ipisis.dtos.OfertaDTO;
 import com.ipisis.models.entities.tables.Oferta;
 import com.ipisis.models.responses.DetallePeticionResponse;
 import com.ipisis.repositories.OfertaRepository;

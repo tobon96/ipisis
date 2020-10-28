@@ -1,8 +1,7 @@
 package com.ipisis.controllers;
 
 import com.ipisis.constants.EndpointsConstants;
-import com.ipisis.dtos.IdeaDTO;
-import com.ipisis.mappers.OfertaDTO;
+import com.ipisis.dtos.OfertaDTO;
 import com.ipisis.models.responses.DetallePeticionResponse;
 import com.ipisis.services.OfertaService;
 import org.springframework.http.HttpStatus;
